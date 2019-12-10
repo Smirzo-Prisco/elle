@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3 class="bold">
+        Change image profile
+    </h3>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-20 text-center">
+            <span class="btn btn-primary btn-file"> Select your avatar...
+                 <input type="file" nv-file-select uploader="AvatarCtrl.uploader" />
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Cropping area</h4>
+            <div class="cropBox">
+                <div class="cropArea ng-class:{ 'csspinner load1': AvatarCtrl.loadingAvatarPreview };">
+                    <img-crop image="AvatarCtrl.avatarImage" result-image="AvatarCtrl.avatarCroppedImage" result-image-size="128" area-min-size="128" area-type="square"></img-crop>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-s" ng-click="AvatarCtrl.close()">
+        <span class="glyphicon glyphicon-log-out"></span> Close
+    </button>
+    <button type="button" class="btn btn-primary btn-s" ng-click="AvatarCtrl.convertAndUpload()" ng-disabled="!AvatarCtrl.uploader.getNotUploadedItems().length">
+        <span class="glyphicon glyphicon-upload"></span> Save avatar
+    </button>
+</div>
+

@@ -1,0 +1,39 @@
+<!-- start: TOP NAVBAR -->
+<header class="navbar navbar-default navbar-static-top hidden-print" data-ng-controller="AuthController as AuthCtrl">
+    <nav class="nvb navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar navbar-header">
+                <span data-toggle="collapse" data-target=".navbar-top" id="badge_total" class="hidden_button pointer navbar-toggle glyphicon glyphicon-menu-hamburger glyph_lg"></span>
+                <ul class="nav nav-pills">
+
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse navbar-top">
+                <ul class="nav navbar-nav text-center" data-ng-controller="MenuController as MenuCtrl">
+                    <div class="csspinner load2 margin-top-30" ng-show="MenuCtrl.loadingMenu"></div>
+                    <menu features="MenuCtrl.features"></menu>
+                </ul>
+                <li>
+                    <a href ng-click="AuthCtrl.logout()" translate="topbar.user.LOGOUT"> Log Out </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <!--    NOTIFICHE   -->
+    <div id="tag_list" class="modal fade">
+        <div class="modal-dialog">
+            <div class="panel panel-f" style="padding:0;">
+                <div class="panel-heading text-left">
+                    <div class="row">
+                        <div class="col-xs-9">Le tue notifiche</div>
+                        <div class="col-xs-3 text-right"><span id="icon_notifications" class="glyphicon glyphicon-remove-circle pointer glyph_lg" data-dismiss="modal"></span></div>
+                    </div>
+                </div>
+                <div class="panel-body text-center"><ul class="list-group nav"></ul></div>
+            </div>
+        </div>
+    </div>
+    <!--    FINE    NOTIFICHE   -->
+</header>
+<!-- end: TOP NAVBAR -->

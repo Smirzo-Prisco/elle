@@ -1,0 +1,129 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.pages.USERPROFILE">USER PROFILE</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: USER PROFILE -->
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- /// controller:  'UserCtrl' -  localtion: assets/js/controllers/userCtrl.js /// -->
+            <div data-ng-controller="ProfileController as ProfileCtrl">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="center">
+                            <h4>{{ ProfileCtrl.userInfo.fullname}}</h4>
+                            <div class="avatar-image">
+                                <div class="thumbnail">
+                                    <img ng-src="{{ app.avatarPath+app.currentUser.avatar }}" alt="">
+                                </div>
+                            </div>
+                            <div class="avatar-image-buttons">
+                                <span class="btn btn-primary" ng-click="ProfileCtrl.openAvatarModal()" title="Edit avatar">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <span class="btn btn-danger" ng-click="ProfileCtrl.resetAvatar()" title="Remove avatar" ng-attr-disabled="{{ app.currentUser.avatar === 'no_avatar.jpg' ? true : undefined }}">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <form role="form" id="profileForm" class="form-horizontal profile-form" editable-form name="profileForm" onaftersave="ProfileCtrl.updateUser(profileForm)">
+                            <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.firstname.$dirty && profileForm.firstname.$invalid, 'has-success':profileForm.firstname.$valid}]">
+                                <label class="col-sm-2 control-label text-bold" for="firstname">
+                                    First name
+                                </label>
+                                <div class="col-sm-10">
+                                    <span editable-text="ProfileCtrl.userInfo.firstname" class="xed-input" id="firstname" e-class="form-control underline" e-style="width:100%" e-required e-name="firstname" e-required>{{ ProfileCtrl.userInfo.firstname || 'empty' }}</span>
+                                </div>
+                            </div>
+                            <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.lastname.$dirty && profileForm.lastname.$invalid, 'has-success':profileForm.lastname.$valid}]">
+                                <label class="col-sm-2 control-label text-bold" for="lastname">
+                                    Last name
+                                </label>
+                                <div class="col-sm-10">
+                                    <span editable-text="ProfileCtrl.userInfo.lastname" class="xed-input" id="lastname" e-class="form-control underline" e-required e-name="lastname" e-required>{{ ProfileCtrl.userInfo.lastname || 'empty' }}</span>
+                                </div>
+                            </div>
+                            <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.username.$dirty && profileForm.username.$invalid, 'has-success':profileForm.username.$valid}]">
+                                <label class="col-sm-2 control-label text-bold" for="username">
+                                    Username
+                                </label>
+                                <div class="col-sm-10">
+                                    <span editable-text="ProfileCtrl.userInfo.username" class="xed-input" id="username" e-class="form-control underline" e-required e-name="username" e-required>{{ ProfileCtrl.userInfo.username || 'empty' }}</span>
+                                </div>
+                            </div>
+                            <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.email.$dirty && profileForm.email.$invalid, 'has-success':profileForm.email.$valid}]">
+                                <label class="col-sm-2 control-label text-bold" for="email">
+                                    E-mail
+                                </label>
+                                <div class="col-sm-10">
+                                    <span editable-email="ProfileCtrl.userInfo.email" class="xed-input" id="email" e-class="form-control underline" e-required e-name="email" e-required>{{ ProfileCtrl.userInfo.email || 'empty' }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group profile-group">
+                                <label class="col-sm-2 control-label text-bold" for="phone">
+                                    Phone number
+                                </label>
+                                <div class="col-sm-10">
+                                    <span editable-text="ProfileCtrl.userInfo.phone" class="xed-input" id="phone" e-class="form-control underline" e-name="phone" e-required>{{ ProfileCtrl.userInfo.phone || 'empty' }}</span>
+                                </div>
+                            </div>
+                            <fieldset ng-show="profileForm.$visible">
+                                <legend>Password (leave blank to unchange the password)</legend>
+                                <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.password.$dirty && profileForm.password.$invalid, 'has-success':profileForm.password.$valid}]">
+                                    <label class="col-sm-2 control-label text-bold" for="password"  >
+                                        New password
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control underline" id="password" name="password" ng-model="ProfileCtrl.userInfo.password" password-match="profileForm.passwordMatch" ng-minlength="5">
+                                    </div>
+                                </div>
+                                <div ng-class="['form-group', 'profile-group', {'has-error':profileForm.password.$dirty && profileForm.password.$invalid, 'has-success':profileForm.password.$valid}]">
+                                    <label class="col-sm-2 control-label text-bold" for="confirmNewPassword" >
+                                        Confirm password
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control underline" id="confirmNewPassword" name="passwordMatch" ng-model="profileForm.passwordMatch" passwordMatch="ProfileCtrl.userInfo.password" ng-minlength="5">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-group profile-group" ng-show="!profileForm.$visible">
+                                <label class="col-sm-2 control-label text-bold" for="roles">
+                                    Roles
+                                </label>
+                                <div class="col-sm-10">
+                                    <span id="roles" class="label label-info role-label profile_rolelist" ng-repeat="role in ProfileCtrl.userInfo.roles"> {{role.name}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group margin-bottom-0">
+                                <div class="col-sm-offset-2 col-sm-10 text-right">
+                                    <button type="button" class="btn btn-primary btn-o btn-wide" ng-click="profileForm.$show()" ng-show="!profileForm.$visible">
+                                        Edit profile
+                                    </button>
+                                    <span ng-show="profileForm.$visible">
+                                        <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$waiting || profileForm.$invalid">
+                                          Save
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()">
+                                          Cancel
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: USER PROFILE -->

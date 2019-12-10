@@ -1,0 +1,31 @@
+<li ng-repeat="feature in features" ng-class="{'active open':$state.includes(feature.item.sref)}">
+    <!-- feature without children -> is a feature with real ui-state -->
+    <a ng-if="feature.children.length <= 0" ui-sref="{{feature.item.sref}}">
+        <div class="item-content">
+            <div class="item-media">
+                <letter-icon data="{{feature.item.name}}" char-count="2" size="sm" color="auto" box="round"></letter-icon>
+            </div>
+            <div class="item-inner">
+                <span class="title"> {{feature.item.name}} </span>
+            </div>
+        </div>
+    </a>
+
+    <!-- feature whit children -> is a feature with virtual ui-state -->
+    <a ng-if="feature.children.length > 0">
+        <div class="item-content">
+            <div class="item-media">
+                <letter-icon data="{{feature.item.name}}" char-count="2" size="sm" color="auto" box="round"></letter-icon>
+            </div>
+            <div class="item-inner">
+                <span class="title"> {{feature.item.name}} </span><i class="icon-arrow"></i>
+            </div>
+        </div>
+    </a>
+
+    <ul class="sub-menu" ng-if="feature.children.length > 0">
+        <li ng-repeat="child in feature.children" ui-sref-active="active">
+            <a ui-sref="{{child.item.sref}}"> <span class="title"> {{child.item.name}} </span> </a>
+        </li>
+    </ul>
+</li>

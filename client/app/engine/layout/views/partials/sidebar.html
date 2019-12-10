@@ -1,0 +1,29 @@
+<div class="nav-user-wrapper" data-ng-controller="AuthController as AuthCtrl">
+    <div class="media">
+        <div class="media-left">
+            <a class="profile-card-photo" href="#"><img alt="{{app.currentUser.fullname}}" ng-src="{{ app.avatarPath+app.currentUser.avatar }}"></a>
+        </div>
+        <div class="media-body">
+            <span class="media-heading text-white">{{ app.currentUser.fullname }}</span>
+            <div class="text-small text-white-transparent">
+                {{ app.currentUser.email }}
+            </div>
+        </div>
+
+        <div class="media-right media-middle">
+            <div uib-dropdown is-open="status.isopen">
+                <a href class="dropdown-toggle btn btn-transparent text-white" uib-dropdown-toggle><i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu pull-right animated fadeInRight">
+                    <li>
+                        <a ui-sref="app.profile" translate="topbar.user.PROFILE"> My Profile </a>
+                    </li>
+                    <li>
+                        <a href ng-click="AuthCtrl.logout()" translate="topbar.user.LOGOUT"> Log Out </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end: USER OPTIONS -->

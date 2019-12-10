@@ -1,0 +1,39 @@
+<div check-permission view="server" modal="true">
+    <div class="modal-header">
+        <h3 class="bold">
+            <span ng-if="ServerFormCtrl.formMode == 0">Nuovo server</span>
+            <span ng-if="ServerFormCtrl.formMode == 1">
+                <letter-icon data="{{ServerFormCtrl.server.name}}" class="margin-left-5" color="auto" box="circle" size="md" uib-tooltip="{{OServerFormCtrl.server.name}}"></letter-icon>&nbsp;<span class="modal-form-title">{{ServerFormCtrl.server.name}}</span>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body">
+        <form name="elemForm" id="elemForm">
+            <fieldset>
+                <legend>Server data</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group" ng-class="{'has-error':elemForm.code.$dirty && elemForm.code.$invalid, 'has-success':elemForm.code.$valid}">
+                            <input type="text" placeholder="Insert a code" class="form-control" name="code" ng-model="ServerFormCtrl.server.code" required ng-minlength="2"/>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group" ng-class="{'has-error':elemForm.name.$dirty && elemForm.name.$invalid, 'has-success':elemForm.name.$valid}">
+                            <input type="text" placeholder="Insert a name" class="form-control" name="name" ng-model="ServerFormCtrl.server.name" required ng-minlength="2"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-primary btn-o" ng-click="ServerFormCtrl.cancel(elemForm)">Cancel</a>
+        <a class="btn btn-primary" data-action="edit" form="elemForm" type="submit" ng-click="ServerFormCtrl.submit(elemForm)" ng-disabled="elemForm.$invalid">
+            <span translate="config.BTN_SAVE" ng-if="ServerFormCtrl.formMode == 0">Save</span>
+            <span translate="config.BTN_EDIT" ng-if="ServerFormCtrl.formMode == 1">Edit</span>
+        </a>
+    </div>
+</div>
+

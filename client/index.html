@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title page-title>Elle</title>
+
+    <!-- inject-vendor:css -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="bower_components/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.min.css">
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
+    <link rel="stylesheet" href="bower_components/angular-aside/dist/css/angular-aside.min.css">
+    <link rel="stylesheet" href="bower_components/angular-notification-icons/dist/angular-notification-icons.min.css">
+    <link rel="stylesheet" href="bower_components/v-accordion/dist/v-accordion.min.css">
+    <link rel="stylesheet" href="bower_components/v-button/dist/v-button.min.css">
+    <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css">
+    <link rel="stylesheet" href="bower_components/ladda/dist/ladda-themeless.min.css">
+    <link rel="stylesheet" href="bower_components/angular-awesome-slider/dist/css/angular-awesome-slider.min.css">
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css">
+    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css">
+    <link rel="stylesheet" href="bower_components/ngImgCrop/compile/minified/ng-img-crop.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css">
+    <link rel="stylesheet" href="bower_components/ng-notify/dist/ng-notify.min.css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="bower_components/spectrum/spectrum.css">
+    <link rel="stylesheet" href="bower_components/Jcrop/css/jquery.Jcrop.min.css">
+    <link rel="stylesheet" href="bower_components/angular-responsive-tables/release/angular-responsive-tables.css">
+    <!-- endinject -->
+</head>
+<body data-ng-controller="LayoutController as LayoutCtrl">
+    <!-- toaster directive -->
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    <!-- / toaster directive -->
+    <div ui-view id="app" class="lyt-5" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}"></div>
+
+    <!-- inject-vendor:js -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="bower_components/components-modernizr/modernizr.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="bower_components/sweetalert/lib/sweet-alert.min.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/ladda/dist/ladda.min.js"></script>
+    <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="bower_components/ckeditor/ckeditor.js"></script>
+    <script src="bower_components/jquery-nestable/jquery.nestable.js"></script>
+    <script src="bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="bower_components/jquery-appear/build/jquery.appear.min.js"></script>
+    <script src="bower_components/spectrum/spectrum.js"></script>
+    <script src="bower_components/Jcrop/js/jquery.Jcrop.min.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+
+    <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+    <script src="bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js"></script>
+    <script src="bower_components/angular-swipe/dist/angular-swipe.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
+    <script src="bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
+    <script src="bower_components/ng-bs-daterangepicker/dist/ng-bs-daterangepicker.min.js"></script>
+    <script src="bower_components/angular-truncate/src/truncate.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+    <script src="bower_components/angular-ui-switch/angular-ui-switch.min.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/angular-aside/dist/js/angular-aside.min.js"></script>
+    <script src="bower_components/v-accordion/dist/v-accordion.min.js"></script>
+    <script src="bower_components/v-button/dist/v-button.min.js"></script>
+    <script src="bower_components/angular-sweetalert-promised/SweetAlert.min.js"></script>
+    <script src="bower_components/angular-notification-icons/dist/angular-notification-icons.min.js"></script>
+    <script src="bower_components/angular-awesome-slider/dist/angular-awesome-slider.min.js"></script>
+    <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="bower_components/angular-slick-carousel/dist/angular-slick.min.js"></script>
+    <script src="bower_components/ng-notify/dist/ng-notify.min.js"></script>
+    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+    <script src="bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
+    <script src="bower_components/angular-ui-utils/mask.min.js"></script>
+    <script src="bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
+    <script src="bower_components/angular-ckeditor/angular-ckeditor.min.js"></script>
+    <script src="bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js"></script>
+    <script src="bower_components/ng-nestable/src/angular-nestable.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/ng-knob/dist/ng-knob.min.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/angular-appear/build/angular-appear.min.js"></script>
+    <script src="bower_components/angular-count-to-0.1.1/dist/angular-filter-count-to.min.js"></script>
+    <script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
+    <script src="bower_components/socket.io-client/socket.io.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/highcharts/highcharts-more.js"></script>
+    <script src="bower_components/highcharts/modules/solid-gauge.js"></script>
+    <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script src="bower_components/angular-responsive-tables/release/angular-responsive-tables.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <!-- Bootstrapping App -->
+    <script src="app/app.module.js"></script>
+    <!-- Utils -->
+    <script src="app/utils/logger/logger.module.js"></script>
+    <script src="app/utils/logger/factories/logger.js"></script>
+    <!-- Core Module -->
+    <script src="app/engine/core/core.module.js"></script>
+    <script src="app/engine/core/factories/authInterceptor.js"></script>
+    <script src="app/engine/core/services/core.js"></script>
+    <script src="app/engine/core/services/auth.js"></script>
+    <script src="app/engine/core/services/socket.js"></script>
+    <script src="app/engine/core/services/common.js"></script>
+    <script src="app/engine/core/routes/core.js"></script>
+    <script src="app/engine/core/controllers/core.js"></script>
+    <script src="app/engine/core/controllers/auth.js"></script>
+    <script src="app/engine/core/controllers/lang.js"></script>
+    <!-- Layout Module -->
+    <script src="app/engine/layout/layout.module.js"></script>
+    <script src="app/engine/layout/controllers/layout.js"></script>
+    <script src="app/engine/layout/controllers/menu.js"></script>
+    <script src="app/engine/layout/controllers/modalcrop.js"></script>
+    <script src="app/engine/layout/factories/toggle.js"></script>
+    <script src="app/engine/layout/filters/letterFilter.js"></script>
+    <script src="app/engine/layout/directives/menu.js"></script>
+    <script src="app/engine/layout/directives/pageTitle.js"></script>
+    <script src="app/engine/layout/directives/ctCrop.js"></script>
+    <script src="app/engine/layout/directives/sidebars.js"></script>
+    <script src="app/engine/layout/directives/letterIcon.js"></script>
+    <script src="app/engine/layout/directives/charLimit.js"></script>
+    <script src="app/engine/layout/directives/panelTool.js"></script>
+    <script src="app/engine/layout/directives/toggle.js"></script>
+    <script src="app/engine/layout/directives/emptyLinks.js"></script>
+    <script src="app/engine/layout/directives/dismiss.js"></script>
+    <script src="app/engine/layout/directives/fullHeight.js"></script>
+    <script src="app/engine/layout/directives/landingHeader.js"></script>
+    <script src="app/engine/layout/directives/perfectScrollbar.js"></script>
+    <script src="app/engine/layout/directives/offClick.js"></script>
+    <script src="app/engine/layout/directives/touchSpin.js"></script>
+    <script src="app/engine/layout/directives/select.js"></script>
+    <script src="app/engine/layout/directives/formUtils.js"></script>
+    <script src="app/engine/layout/directives/checkPermission.js"></script>
+    <!-- Profile Module -->
+    <script src="app/profile/profile.module.js"></script>
+    <script src="app/profile/routes/profile.js"></script>
+    <script src="app/profile/controllers/profile.js"></script>
+    <script src="app/profile/controllers/avatar.js"></script>
+    <!-- Dashboard Module -->
+    <script src="app/dashboard/dashboard.module.js"></script>
+    <script src="app/dashboard/routes/dashboard.js"></script>
+    <script src="app/dashboard/controllers/dashboard.js"></script>
+    <script src="app/dashboard/controllers/acquisition.js"></script>
+    <script src="app/dashboard/controllers/conversion.js"></script>
+    <script src="app/dashboard/controllers/performance.js"></script>
+    <script src="app/dashboard/controllers/expenses.js"></script>
+    <!-- User Module -->
+    <script src="app/config/user/user.module.js"></script>
+    <script src="app/config/user/routes/user.js"></script>
+    <script src="app/config/user/controllers/user.js"></script>
+    <script src="app/config/user/controllers/userForm.js"></script>
+    <script src="app/config/user/services/user.js"></script>
+    <!-- Feature Module -->
+    <script src="app/config/feature/feature.module.js"></script>
+    <script src="app/config/feature/routes/feature.js"></script>
+    <script src="app/config/feature/services/feature.js"></script>
+    <script src="app/config/feature/controllers/featureForm.js"></script>
+    <script src="app/config/feature/controllers/feature.js"></script>
+    <!-- endinject -->
+</body>
+</html>

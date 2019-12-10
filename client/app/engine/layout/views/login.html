@@ -1,0 +1,58 @@
+<div class="row" data-ng-controller="AuthController as AuthCtrl">
+    <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-7 col-lg-offset-3">
+        <p class="text-center text-dark text-bold text-extra-large margin-top-15">
+            Benvenuto su {{app.name}}
+        </p>
+        <blockquote class="list_alert_lg text-center">
+            Se è la prima volta che visiti il sito puoi accedere inserendo solamente nome e cognome lasciando vuoto il campo relativo alla password.
+        </blockquote>
+        <!-- start: LOGIN BOX -->
+        <div class="box-login">
+            <form class="form-login" ng-submit="AuthCtrl.submitLogin()">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username" data-ng-model="AuthCtrl.loginData.username">
+                </div>
+                <div class="form-group form-actions">
+                    <input type="password" class="form-control password" name="password" placeholder="Password" data-ng-model="AuthCtrl.loginData.password">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="btn_set_login" class="btn btn-login btn-sm form-control">Entra</button>
+                </div>
+            </form>
+            <div class="form-actions">
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#pwd_retrieve_popup" style="font-family:cursive;font-size:16px;">Recupera password</button>
+            </div>
+            <!-- start: COPYRIGHT -->
+            <div class="copyright">
+                {{app.year}} &copy; {{app.name}} (ver.{{app.version}}) by {{ app.author }}.
+            </div>
+            <!-- end: COPYRIGHT -->
+        </div>
+        <!-- end: LOGIN BOX -->
+    </div>
+</div>
+
+<div id="pwd_retrieve_popup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="panel panel-f" style="padding:0;">
+            <div class="panel-heading text-left">
+                <div class="row">
+                    <div class="col-xs-9">Recupero password</div>
+                    <div class="col-xs-3 text-right"><span class="glyphicon glyphicon-remove-circle pointer glyph_lg" data-dismiss="modal"></span></div>
+                </div>
+            </div>
+            <div class="panel-body text-center">
+                <form onsubmit="return false">
+                    <div class="modal-body">
+                        <input type="email" id="pwd_retrieve" class="input-sm" autocomplete="email" title="Inserire l'e-mail" x-moz-errormessage="E-mail non valida" placeholder="E-mail..." autofocus required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Chiudi</button>
+                        <button type="submit" class="btn btn-primary btn-sm" id="btn_pwd_retrieve">Invia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: LOGIN -->

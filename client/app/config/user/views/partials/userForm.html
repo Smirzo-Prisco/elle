@@ -1,0 +1,69 @@
+<div check-permission view="user" modal="true">
+    <div class="modal-header">
+        <h3 class="bold">
+            <span translate="config.user.ADD_NEW_USER" ng-if="UserFormCtrl.formMode == 0"></span>
+            <span ng-if="UserFormCtrl.formMode == 1">
+            <img ng-src="{{ app.avatarPath + UserFormCtrl.user.avatar}}"  class="margin-left-5 img-circle width-50"  uib-tooltip="{{UserFormCtrl.user.fullname}}">&nbsp;<span class="modal-form-title">{{UserFormCtrl.user.firstname + ' ' + UserFormCtrl.user.lastname}}</span>
+        </span>
+        </h3>
+    </div>
+
+    <div class="modal-body">
+        <form name="elemForm" id="elemForm">
+            <div ng-class="['form-group', {'has-error':elemForm.firstname.$dirty && elemForm.firstname.$invalid, 'has-success':elemForm.firstname.$valid}]">
+                <label class="control-label"> Nome <span class="symbol required"></span> </label>
+                <input type="text" placeholder="Inserisci il tuo nome" class="form-control" name="firstname" ng-model="UserFormCtrl.user.firstname" required ng-minlength="2"/>
+
+            </div>
+            <div ng-class="['form-group', {'has-error':elemForm.lastname.$dirty && elemForm.lastname.$invalid, 'has-success':elemForm.lastname.$valid}]">
+                <label class="control-label"> Cognome <span class="symbol required"></span> </label>
+                <input type="text" placeholder="Inserisci il tuo cognome" class="form-control" name="lastname" ng-model="UserFormCtrl.user.lastname" required ng-minlength="2"/>
+
+            </div>
+            <div ng-class="['form-group', {'has-error':elemForm.username.$dirty && elemForm.username.$invalid, 'has-success':elemForm.username.$valid}]">
+                <label class="control-label"> Username <span class="symbol required"></span> </label>
+                <span class="input-icon">
+                <input type="text" placeholder="Inserisci un username" class="form-control" name="username" ng-model="UserFormCtrl.user.username" required ng-minlength="5"/>
+                <i class="fa fa-user"></i>
+            </span>
+            </div>
+            <div ng-class="['form-group', {'has-error':elemForm.email.$dirty && elemForm.email.$invalid, 'has-success':elemForm.email.$valid}]">
+                <label class="control-label"> Email <span class="symbol required"></span> </label>
+                <span class="input-icon">
+                <input type="email" placeholder="Inserisci un indirizzo email valido" class="form-control" name="email" ng-model="UserFormCtrl.user.email" required>
+                <i class="fa fa-envelope"></i>
+            </span>
+            </div>
+            <div ng-class="['form-group', {'has-error':elemForm.password.$dirty && elemForm.password.$invalid, 'has-success':elemForm.password.$valid}]">
+                <label class="control-label"> Password <span ng-if="UserFormCtrl.formMode === 1">(Leave blank to not change the password)</span> <span class="symbol required"></span></label>
+                <span class="input-icon">
+                <input type="password" placeholder="Inserisci una password" class="form-control" name="password" ng-model="UserFormCtrl.user.password" password-match="UserFormCtrl.form.passwordMatch" ng-minlength="5" ng-required="UserFormCtrl.formMode === 0">
+                <i class="fa fa-key"></i>
+            </span>
+            </div>
+            <div ng-class="['form-group', {'has-error':elemForm.password.$dirty && elemForm.password.$invalid, 'has-success':elemForm.password.$valid}]">
+                <label class="control-label"> Conferma password <span class="symbol required"></span></label>
+                <span class="input-icon">
+                <input type="password" placeholder="Conferma la password" class="form-control" name="passwordMatch" ng-model="UserFormCtrl.form.passwordMatch" passwordMatch="UserFormCtrl.user.password" ng-minlength="5" ng-required="UserFormCtrl.formMode === 0">
+                <i class="fa fa-key"></i>
+            </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Telefono </label>
+                <span class="input-icon">
+                <input type="text" placeholder="Inserisci un numero di telefono" class="form-control" name="phone" ng-model="UserFormCtrl.user.phone">
+                <i class="fa fa-phone"></i>
+            </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" p>
+        <a class="btn btn-primary btn-o" ng-click="UserFormCtrl.cancel(elemForm)">Cancel</a>
+        <a class="btn btn-primary" data-action="edit" form="elemForm" type="submit" ng-click="UserFormCtrl.submit(elemForm)" ng-disabled="elemForm.$invalid">
+            <span translate="config.BTN_SAVE" ng-if="UserFormCtrl.formMode == 0">Save</span>
+            <span translate="config.BTN_EDIT" ng-if="UserFormCtrl.formMode == 1">Edit</span>
+        </a>
+    </div>
+</div>
+

@@ -1,0 +1,42 @@
+<div check-permission view="feature" modal="true">
+    <div class="modal-header">
+        <h3 class="bold">
+            <span ng-if="FeatureFormCtrl.formMode == 0">Nuova feature</span>
+            <span ng-if="FeatureFormCtrl.formMode == 1">
+                <letter-icon data="{{FeatureFormCtrl.feature.name}}" class="margin-left-5" color="auto" box="circle" size="md" uib-tooltip="{{OFeatureFormCtrl.feature.name}}"></letter-icon>&nbsp;<span class="modal-form-title">{{FeatureFormCtrl.feature.name}}</span>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body">
+        <form name="elemForm" id="elemForm">
+            <div class="form-group" ng-class="{'has-error':elemForm.name.$dirty && elemForm.name.$invalid, 'has-success':elemForm.name.$valid}">
+                <label class="control-label"> Name <span class="symbol required"></span> </label>
+                <input type="text" placeholder="Insert feature name" class="form-control" name="name" ng-model="FeatureFormCtrl.feature.name" required ng-minlength="3"/>
+            </div>
+            <div class="form-group" ng-class="{'has-error':elemForm.i18n.$dirty && elemForm.i18n.$invalid, 'has-success':elemForm.i18n.$valid}">
+                <label class="control-label"> i18n <span class="symbol required"></span> </label>
+                <span class="input-icon">
+                    <input type="text" placeholder="Insert i18n label" class="form-control" name="i18n" ng-model="FeatureFormCtrl.feature.i18n" required  ng-minlength="3"/>
+                    <i class="fa fa-globe"></i>
+                </span>
+            </div>
+            <div class="form-group" ng-class="{'has-error':elemForm.sref.$dirty && elemForm.sref.$invalid, 'has-success':elemForm.sref.$valid}">
+                <label class="control-label"> UI-SREF<span class="symbol required"></span> </label>
+                <span class="input-icon">
+                <input type="text" placeholder="Insert a ui-sref" class="form-control" name="sref" ng-model="FeatureFormCtrl.feature.sref" required ng-minlength="3"/>
+                <i class="fa fa-chain"></i>
+            </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-o" ng-click="FeatureFormCtrl.cancel(elemForm)">Cancel</button>
+        <button class="btn btn-primary" data-action="edit" form="elemForm" type="submit" ng-click="FeatureFormCtrl.submit(elemForm)" ng-disabled="elemForm.$invalid">
+            <span translate="config.BTN_SAVE" ng-if="FeatureFormCtrl.formMode == 0">Save</span>
+            <span translate="config.BTN_EDIT" ng-if="FeatureFormCtrl.formMode == 1">Edit</span>
+        </button>
+    </div>
+</div>
+

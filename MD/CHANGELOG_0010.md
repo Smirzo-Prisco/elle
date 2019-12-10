@@ -1,0 +1,106 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+- From 0.0.1 to 0.0.100 -> Seed development
+#### [0.0.10] - (2016-10-01 - 2016-09-01)
+##### Added and Fix
+- First steps on sidebar dynamic approach over DOM
+- Edited Feature Schema via Mongoose
+- Evo mockData for Feature
+- First Step for RBAC via subDocuments inside objectDocuments
+- Revamped in toto Feature View plus GET via MongoDB
+- Created joinUserRole Module BEND
+- Added Highchart and highchartsNg
+- Added vertilize directive
+- Bower packages now are blocked to patch version
+- Authentication system revamped
+- Moved toaster div to index.html
+- Fix on gulp.config.js
+- A little bit of cleaning
+- Cutted Jwt from BEND
+- Uninstalled JWT from package.json via NPM
+- BEND evo for server client cookie/session
+- Included chartJs and Echarts.js libs
+- BEND evo SessionMongoDb Storage
+- On LogOut Session Record in Mongo was deleted
+- Autodestroy Session Record in Mongo was deleted
+- Created all Energy Modules, Controllers, Views and route skeletons
+- Populated (just a test) cookie body
+- Evo FEND User function
+- Implemented Karma Unit Test Base
+- Implemented Karma Injection for testing
+- Gulp evo for 'app_data' dirs
+- Implemented some test for ctrl, svc etc etc
+- Implemented SocketIo
+- Implemented utils module for logger and exception catcher
+- Implemented FEND User function
+- Implemented breadcrumbING for users
+- Implemented FEND HTTPInterceptor
+- Implemented FEND Routing Login
+- Implemented FEND Core.module
+- Implemented FEND Layout.module
+- Implemented FEND User.module
+- Implemented FEND Role.module
+- Enforced token control via Jwt
+- Enforced authoring control via Passport
+- Implemented BEND User ORM via Mongoose
+- Implemented BEND Role ORM via Mongoose
+- Implemented BEND Feature ORM via Mongoose
+- Implemented Gulp Main skeleton
+- Implemented Gulp Task 'help' test Passed
+- Implemented Gulp Task 'analyze' added PLATO reporting
+- Implemented Gulp Task 'templatecache' test Passed
+- Implemented Gulp Task 'js', 'venrodjs', 'css', 'vendorcss' test Passed
+- Implemented Gulp Task 'fonts', 'flags', 'i18n', 'images' test Passed
+- Implemented Gulp Task 'inject', 'build', 'test', 'autotest' test Passed
+- Implemented Gulp Task 'clean', 'serve-development', 'serve-production' test Passed
+- Added js path inside gulpconfig.js
+- Created 3 test routes server Side for auth control
+- Implemented passport and passport-locale
+- Revamped Server.js and express.js for passport
+- Revamped passport.js
+- Created userModel with mongooseTriggers
+- Implemented Crypto SHA512 via salt
+- Implemented cookie-parser and express-session
+- Created user.controller and routes (just example)
+- Created mock-data for userModel.
+- Completed simple crud to todo list
+- Better DELETE verb for TODO in mongoDB
+- Revamped Server.Js for a better scaffolding
+- Revamped Server.Js to fix routing REQ problem
+- Implemented CRUD Routes for MongoDB
+- Implemented CRUD Controllers for MongoDB
+- Implemented ControllerING scaffold
+- Implemented Routing for single collection
+- Implemented MongoDB connection
+- Implemented ORM for MongoDB via Mongoose
+- Implemented Modeling TODOS collection
+- MockingData over TODOS collection
+- Revamp Server and base scaffolding
+- Revamped Server Sector plus scaffolding
+- Implemented GulpTask 'serve-dev' via browserSyn
+- Implemented .jscsrc
+- Implemented .jshintrc
+- Implemented Gulp part I
+- Implemented gulpfile.js & gulp.config.json
+- MongoDb Start just the service
+- Index.html very very vanilla no NG
+- Implemented bower.json
+- Npm install base for Server
+- Minimal Bower packages
+- Node Server Base (Via Express)
+- Minimal Scaffolding for FEND
+- Minimal Scaffolding for BEND
+- .package.json file for npm libs via node.js.
+- .bower.json file for bower FEND libs.
+- .bowerrc file for bower pathing.
+- .gitignore file for a better git interaction.
+- CHANGELOG.md file for codeChanges.
+- LICENSE.md file for GPL v3 (2007).
+- README.md file for classical GITtted purposes.
+- TODO.md for simple tasking management.
+#### [Unreleased]
+##### Added
+- Just thinking about a legendary app!
+
+[Unreleased]: http://www.easyweb.it
+[0.0.10]: https://bitbucket.org/easywebsrl/centralapp/src/7f08dc36c6bc96dfe8d891c976185297db818e5b/README.md?at=master&fileviewer=file-view-default

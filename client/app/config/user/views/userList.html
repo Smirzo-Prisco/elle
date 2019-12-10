@@ -1,0 +1,261 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin">USER MANAGEMENT</h4>
+    <span class="mainDescription"></span>
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- start: TABLE WITH FILTERS -->
+<div class="container-fluid container-fullw padding-bottom-50" data-ng-controller="UserController as UserCtrl">
+
+    <script type="text/ng-template" id="letterFilter.html">
+        <div class="center">
+            <a href="#">
+                <letter-icon icon="fa fa-times-circle" char-count="1" color="auto" box="circle" size="sm" uib-tooltip="Reset" ng-click="UserCtrl.filterLetter('reset')" class="margin-bottom-5"></letter-icon>
+            </a>
+            <a href="#" data-letter="{{letter}}" ng-repeat="letter in UserCtrl.letterList">
+                <letter-icon data="{{letter}}" char-count="1" color="auto" box="circle" size="sm" uib-tooltip="{{letter}}" ng-click="UserCtrl.filterLetter(letter)" class="margin-bottom-5"></letter-icon>
+            </a>
+        </div>
+    </script>
+
+    <!-- FILTER TOOLBAR ON LG SCREEN-->
+    <div class="row padding-bottom-20 visible-lg">
+
+        <div class="col-md-8 col-sm-12">
+            <div role="form" class="form-inline">
+                <div class="input-group" ng-if="$state.current.val > 200">
+                    <a class="btn btn-squared btn-primary" href="#" ng-click="UserCtrl.openForm()"><i class="fa fa-plus"></i> New user</a>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon input-icon-right">
+                        <input type="text" placeholder="Filter by lastname" class="form-control" ng-model="UserCtrl.searchFilter">
+                        <i class="fa fa-search hand-cursor" ng-if="UserCtrl.searchFilter.length <= 0"></i>
+                        <i class="fa fa-times hand-cursor" ng-if="UserCtrl.searchFilter.length > 0" ng-click="UserCtrl.searchFilter=''"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="btn-group pull-right" ng-init="UserCtrl.gridViewMode=1">
+                <label class="btn btn-squared btn-primary" uib-popover-template="UserCtrl.letterFilterPopover.templateUrl" popover-trigger="outsideClick" popover-placement="left" popover-title="{{UserCtrl.letterFilterPopover.title}}">
+                    <i class="fa fa-filter"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="1">
+                    <i class="ti ti-layout-grid4"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="2">
+                    <i class="ti ti-layout-grid3"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="3">
+                    <i class="ti ti-view-list"></i>
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <!--END FILTER TOOLBAR ON LG SCREEN-->
+
+    <!-- FILTER TOOLBAR ON MD/SM/XS SCREEN -->
+    <div class="row padding-bottom-20 hidden-lg">
+
+        <div class="fullwidth padding-10">
+                <span class="input-icon input-icon-right">
+                    <input type="text" placeholder="Filtra" class="form-control" ng-model="UserCtrl.searchFilter">
+                    <i class="fa fa-search hand-cursor" ng-if="UserCtrl.searchFilter.length <= 0"></i>
+                    <i class="fa fa-times hand-cursor" ng-if="UserCtrl.searchFilter.length > 0" ng-click="UserCtrl.searchFilter=''"></i>
+                </span>
+        </div>
+
+        <div class="fullwidth center">
+            <div class="btn-group" ng-init="UserCtrl.gridViewMode=1">
+                <label class="btn btn-squared btn-primary" ng-click="UserCtrl.openForm()">
+                    <i class="fa fa-plus"></i>
+                </label>
+                <label class="btn btn-squared btn-primary" uib-popover-template="UserCtrl.letterFilterPopover.templateUrl" popover-trigger="outsideClick" popover-placement="bottom" popover-title="{{UserCtrl.letterFilterPopover.title}}">
+                    <i class="fa fa-filter"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="1">
+                    <i class="ti ti-layout-grid4"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="2">
+                    <i class="ti ti-layout-grid3"></i>
+                </label>
+                <label class="btn btn-squared btn-light-blue" ng-model="UserCtrl.gridViewMode" uib-btn-radio="3">
+                    <i class="ti ti-view-list"></i>
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <!-- END FILTER TOOLBAR ON MD/SM/XS SCREEN -->
+
+    <div class="row fade-in" ng-if="UserCtrl.gridViewMode===1">
+        <div class="csspinner load2 margin-top-20" ng-show="UserCtrl.loading"></div>
+        <div class="col-lg-3 col-md-6 col-sm-12 fade-in" ng-repeat="user in UserCtrl.users | filter:{ lastname: UserCtrl.searchFilter } | orderBy:['lastname']" id="{{user._id}}" >
+            <div class="panel panel-white">
+                <div class="special-role-ribbon" ng-if="UserCtrl.inSpecialRole(user.roles)">&nbsp;</div>
+                <div ng-class="['panel-body', {'disabled_item': !user.active}]">
+                    <div class="center">
+                        <img class="center img-circle width-100" ng-src="{{ app.avatarPath + user.avatar }}" alt="{{user.fullname}}">
+                    </div>
+                    <div class="padding-10 text-center">
+                        <h5 class="title_ellipsed">{{user.lastname + ' ' + user.firstname}}</h5>
+                        <h6 class="title_ellipsed"><code>{{user.username}}</code></h6>
+                    </div>
+                    <div class="list-box-50 center">
+                        <letter-icon ng-repeat="role in user.roles | limitTo:3" data="{{role.name}}" class="margin-left-5" char-count="2" color="auto" box="circle" size="sm" uib-tooltip="{{role.name}}"></letter-icon>
+                        <a href="#" ng-click="UserCtrl.openJoinUserRoleForm(user)" ng-if="user.roles.length > 3" class="width-50">
+                            <notification-icon count="user.roles.length-3">
+                                <letter-icon icon="fa fa-users" class="margin-left-5" color="auto" box="circle" size="sm" uib-tooltip="Ruoli..."></letter-icon>
+                            </notification-icon>
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-footer no-margin no-padding">
+                    <div class="btn-group btn-group-justified" check-permission view="user">
+                        <a class="btn btn-blue" href="javascript:;" data-action="edit" ng-click="UserCtrl.openForm(user)" title="Edit user"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="join" ng-click="UserCtrl.openJoinUserRoleForm(user)" title="Associate roles"><i class="fa fa-users"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="perms" ng-click="LayoutCtrl.openActorPermissionForm('user', user, 'feature', 'all')" title="Permission"><i class="fa fa-key"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="remove" ng-click="UserCtrl.removeUser(user)" title="Remove user" ng-hide="user._id === app.currentUser.id"><i class="fa fa-trash-o"></i></a>
+                        <a ng-class="['btn', {'btn-blue': user.active}, {'btn-yellow': !user.active}]" class="btn btn-blue" data-action="manage" href="javascript:;" ng-click="UserCtrl.setUserMode(user, !user.active)" title="Activate/Deactivate" ng-hide="user._id === app.currentUser.id">
+                            <i class="fa fa-power-off"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row fade-in" ng-if="UserCtrl.gridViewMode===2">
+        <div class="csspinner load2 margin-top-20" ng-show="UserCtrl.loading"></div>
+        <div class="col-lg-4 col-md-6 col-sm-12 fade-in" ng-repeat="user in UserCtrl.users | filter:UserCtrl.searchFilter | orderBy:['lastname']" data-gid="{{user._id}}">
+            <div class="panel panel-white">
+                <div class="special-role-ribbon" ng-if="UserCtrl.inSpecialRole(user.roles)">&nbsp;</div>
+                <div ng-class="['panel-body', {'disabled_item': !user.active}]">
+                    <div class="center">
+                        <img class="center img-circle" ng-src="{{ app.avatarPath + user.avatar }}" alt="{{user.fullname}}">
+                    </div>
+
+                    <div class="padding-10 text-center">
+                        <h5 class="title_ellipsed">{{user.lastname + ' ' + user.firstname}}</h5>
+                    </div>
+
+                    <table class="table table-condensed user-contact-table">
+                        <tbody>
+                        <tr>
+                            <td><i class="fa fa-user"></i> {{user.username}}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-envelope-o"></i> <a href="mailto:{{user.email}}" title="{{user.email}}">{{user.email}}</a></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-phone"></i> {{user.phone}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="list-box-50 center">
+                        <letter-icon ng-repeat="role in user.roles | limitTo:5" data="{{role.name}}" char-count="2" color="auto" class="margin-left-5" box="circle" size="sm" uib-tooltip="{{role.name}}"></letter-icon>
+                        <a href="#" ng-click="UserCtrl.openJoinUserRoleForm(user)" ng-if="user.roles.length > 3" class="width-50">
+                            <notification-icon count="user.roles.length-3">
+                                <letter-icon icon="fa fa-users" class="margin-left-5" color="auto" box="circle" size="sm" uib-tooltip="Ruoli..."></letter-icon>
+                            </notification-icon>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="panel-footer no-margin no-padding">
+                    <div class="btn-group btn-group-justified" check-permission view="user" objectid="{{user._id}}">
+                        <a class="btn btn-blue" href="javascript:;" data-action="edit" ng-click="UserCtrl.openForm(user)" title="Edit user"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="join" ng-click="UserCtrl.openJoinUserRoleForm(user)" title="Associate roles"><i class="fa fa-users"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="perms" ng-click="LayoutCtrl.openActorPermissionForm('user', user, 'feature', 'all')" title="Permission"><i class="fa fa-key"></i></a>
+                        <a class="btn btn-blue" href="javascript:;" data-action="remove" ng-click="UserCtrl.removeUser(user)" title="Remove user" ng-hide="user._id === app.currentUser.id"><i class="fa fa-trash-o"></i></a>
+                        <a ng-class="['btn', {'btn-blue': user.active}, {'btn-yellow': !user.active}]"class="btn btn-blue" href="javascript:;" data-action="manage" ng-click="UserCtrl.setUserMode(user, !user.active)" title="Active/Deactive" ng-hide="user._id === app.currentUser.id">
+                            <i class="fa fa-power-off"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row fade-in" ng-if="UserCtrl.gridViewMode===3">
+        <div class="col-md-12">
+            <div class="csspinner load2 margin-top-20" ng-show="UserCtrl.loading"></div>
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center" colspan="2">Utente</th>
+                            <th class="hidden-xs">Username</th>
+                            <th class="hidden-xs hidden-sm hidden-md">Email</th>
+                            <th class="hidden-xs hidden-sm hidden-md">Ruoli assegnati</th>
+                            <th class="center">Tools</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in UserCtrl.users | filter:UserCtrl.searchFilter | orderBy:['lastname']" data-gid="{{user._id}}" ng-class="[{'row_disabled_item': !user.active}]">
+                            <td class="center" ng-class="['center', {'spacial-role-td':UserCtrl.inSpecialRole(user.roles)}]">
+                                <img class="center img-circle width-50" ng-src="{{ app.avatarPath + user.avatar }}" alt="{{user.fullname}}">
+                            </td>
+                            <td><strong>{{user.lastname + ' ' + user.firstname}}</strong></td>
+                            <td class="hidden-xs"><code>{{user.username}}</code></td>
+                            <td class="hidden-xs hidden-sm hidden-md"><a href="mailto::{{user.email}}" class="user-mail">{{user.email}}</a></td>
+                            <td class="hidden-xs hidden-sm hidden-md">
+                                <letter-icon ng-repeat="role in user.roles | limitTo:7" data="{{role.name}}" class="margin-left-5" color="auto" box="circle" size="sm" uib-tooltip="Ruoli...">
+                                    <a href="#" ng-click="UserCtrl.openJointForm(user)" ng-if="user.roles.length > 3" class="width-50">
+                                        <notification-icon count="user.roles.length">
+                                            <letter-icon icon="fa fa-users" class="margin-left-5" color="auto" box="circle" size="sm" uib-tooltip="Ruoli..."></letter-icon>
+                                        </notification-icon>
+                                    </a>
+                            </td>
+                            <td class="width-200 center hidden-xs hidden-sm hidden-md visible-lg">
+                                <div class="btn-group btn-group-justified" check-permission view="user">
+                                    <a class="btn btn-blue" data-action="edit" href="javascript:;" ng-click="UserCtrl.openForm(user)" title="Edit user"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-blue" data-action="join" href="javascript:;" ng-click="UserCtrl.openJoinUserRoleForm(user)" title="Associate roles"><i class="fa fa-users"></i></a>
+                                    <a class="btn btn-blue" data-action="perms" href="javascript:;" ng-click="LayoutCtrl.openActorPermissionForm('user', user, 'feature', 'all')" title="Permission"><i class="fa fa-key"></i></a>
+                                    <a class="btn btn-blue" data-action="remove" href="javascript:;" ng-click="UserCtrl.removeUser(user)" title="Remove user" ng-hide="user._id === app.currentUser.id"><i class="fa fa-trash-o"></i></a>
+                                    <a ng-class="['btn', {'btn-blue': user.active}, {'btn-yellow': !user.active}]" class="btn btn-blue" data-action="manage" href="javascript:;" ng-click="UserCtrl.setUserMode(user, !user.active)" title="Active/Deactive" ng-hide="user._id === app.currentUser.id">
+                                        <i class="fa fa-power-off"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="width-50 center visible-xs visible-sm visible-md hidden-lg">
+                                <div class="btn-group" uib-dropdown check-permission view="user" objectid="{{user._id}}">
+                                    <button type="button" class="btn btn-primary btn-o btn-sm dropdown-toggle" uib-dropdown-toggle>
+                                        <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right dropdown-light" role="menu">
+                                        <li>
+                                            <a href="#" data-action="edit" ng-click="UserCtrl.openForm(user)"><i class="fa fa-edit"></i> Edit user</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-action="join" ng-click="UserCtrl.openJoinUserRoleForm(user)"><i class="fa fa-users"></i> Associate roles</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-action="perms" ng-click="LayoutCtrl.openActorPermissionForm('user', user, 'features', 'all')" title="Permission"><i class="fa fa-key"></i> Manage permission</a>
+                                        </li>
+                                        <li ng-hide="user._id === app.currentUser.id">
+                                            <a href="#" data-action="remove" ng-click="UserCtrl.removeUser(user)"><i class="fa fa-trash-o"></i> Remove user</a>
+                                        </li>
+                                        <li ng-hide="user._id === app.currentUser.id">
+                                            <a href="#" ng-click="UserCtrl.setUserMode(user, !user.active)" data-action="manage">
+                                                <span ng-if="user.active"><i class="fa fa-power-off"></i> Deactivate</span>
+                                                <span ng-if="!user.active"><i class="fa fa-power-off"></i> Activate</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end: TABLE WITH FILTERS -->
